@@ -72,13 +72,40 @@ pip install -r requirements.txt
 ```
 Package	Minimum Version	Purpose
 
-typer	>= 0.9.0	CLI interface
-requests	>= 2.31.0	API and fallback calls
-langgraph	>= 0.0.24	Agent control flow (via LangChain)
-sentence-transformers	>= 2.2.2	Embeddings and text encoding
-faiss-cpu (optional)	>= 1.7.4	Vector search (future support)
-numpy	>= 1.24.0	Embedding preprocessing
-python-dotenv	>= 1.0.1	Loads fallback config from .env file
+typer	>= 0.9.0	### Python Dependencies
+
+
+| Package                  | Minimum Version | Purpose                                 |
+|--------------------------|------------------|------------------------------------------|
+| `typer`                  | `>= 0.9.0`       | CLI interface                            |
+| `requests`               | `>= 2.31.0`      | API and fallback calls                   |
+| `langgraph`              | `>= 0.0.24`      | Agent control flow (via LangChain)       |
+| `sentence-transformers`  | `>= 2.2.2`       | Embeddings and text encoding             |
+| `faiss-cpu` *(optional)* | `>= 1.7.4`       | Vector search (future support)           |
+| `numpy`                  | `>= 1.24.0`      | Embedding preprocessing                  |
+| `python-dotenv`          | `>= 1.0.1`       | Loads fallback config from `.env` file   |
+
+---
+
+### LLM Configuration
+
+#### ✅ Primary Inference: Ollama (Local)
+
+| Component        | Command / Description                      |
+|------------------|---------------------------------------------|
+| Install Ollama   | [Install Guide](https://ollama.com)         |
+| Run model        | `ollama run mistral`                        |
+| Test server      | `curl http://localhost:11434/api/tags`      |
+
+You should see JSON response with model metadata.
+
+#### 🕸️ Secondary (Fallback): Hugging Face Inference API
+
+Create a `.env` file in the root directory:
+
+    HF_API_KEY=your_token_here
+
+Used only if Ollama is not active.
 
 
 ---
