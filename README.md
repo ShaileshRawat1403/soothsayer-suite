@@ -113,10 +113,12 @@ Project Structure
 Place your .md context files inside the docs/ folder.
 Each file should use proper Markdown headers such as:
 
+```markdown
 ## Purpose
 ## Workflow
 ## Risks
 ## Dependencies
+```
 
 Avoid uploading .txt, .pdf, or non-semantic files.
 
