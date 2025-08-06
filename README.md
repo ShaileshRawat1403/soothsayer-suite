@@ -108,34 +108,6 @@ Used only if Ollama is not active.
 
 ---
 
-LLM Configuration
-
-✅ Primary Inference: Ollama (Local)
-
-Component	Command / Description
-
-Install Ollama	Install Guide
-Run model	ollama run mistral
-Test availability	curl http://localhost:11434/api/tags — should return model metadata
-
-
-🕸️ Secondary (Fallback): Hugging Face Inference API
-
-Only used if Ollama is not running or unavailable.
-To enable:
-
-1. Create a .env file in the project root
-
-
-2. Add your API token:
-
-
-
-HF_API_KEY=your_token_here
-
-
----
-
 Project Structure
 
 Place your .md context files inside the docs/ folder.
@@ -151,7 +123,7 @@ Avoid uploading .txt, .pdf, or non-semantic files.
 
 ---
 
-Quick Setup Checklist
+### Quick Setup Checklist
 
 Requirement	Status	Verification Command
 
@@ -167,7 +139,7 @@ Markdown files ready	✅ / ❌	Place in /docs/
 
 ---
 
-Access Control & Permissions
+### Access Control & Permissions
 
 This system runs locally and does not upload data to the cloud.
 
@@ -209,7 +181,7 @@ Large files or long lists	Chunking errors	Split documents or reduce input size
 
 ---
 
-Tips & Best Practices
+### Tips & Best Practices
 
 ✅ Do
 
@@ -232,7 +204,7 @@ Assume your Markdown is readable without testing it
 
 ---
 
-Troubleshooting Guidance
+### Troubleshooting Guidance
 
 Symptom	Likely Cause	Resolution
 
@@ -245,9 +217,9 @@ Symptom	Likely Cause	Resolution
 
 ---
 
-Dependencies, Risks & Escalation Path
+### Dependencies, Risks & Escalation Path
 
-Dependencies
+#### Dependencies
 
 Tool	Role
 
@@ -258,7 +230,7 @@ FAISS (opt)	Vector retrieval backend (future)
 dotenv	Loads fallback credentials
 
 
-Risks
+#### Risks
 
 Risk	Mitigation
 
@@ -270,7 +242,7 @@ Ollama model not loaded	Pre-download mistral and confirm with ollama list
 
 ---
 
-Success Metrics & Outcomes
+### Success Metrics & Outcomes
 
 Metric	Threshold
 
@@ -283,7 +255,7 @@ Fallback not triggered (default)	✅ Ollama responds consistently on port 11434
 
 ---
 
-Resources & References
+### Resources & References
 
 Ollama Docs
 
