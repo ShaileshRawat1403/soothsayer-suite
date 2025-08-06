@@ -1,224 +1,289 @@
 ---
-title: Soothsayer Suite
-description: Local-first agentic AI system for structured reasoning over Markdown documentation
-last_updated: 2025-08-04
-maintainer: Shailesh Rawat
+title: Soothsayer Suite – Prerequisites & Setup
+archetype: Reference
+owner: "@sans-serif-sentiments/team-agentic-ai"
+status: Stable
+version: v1.0
+last_reviewed: 2025-08-06
+tags: [agentic-ai, markdown-processing, local-llm, ollama, langgraph, cli-tools]
 ---
 
-# Soothsayer Suite
+# Soothsayer Suite – Prerequisites & Setup
+
+---
 
 ## Overview
 
-The Soothsayer Suite is a modular, local-first agentic AI system designed to convert unstructured Markdown files into structured, queryable insights. It uses prompt-driven workflows, local LLMs, and content chunking to enable accurate and explainable reasoning over internal documentation.
+The Soothsayer Suite is a local-first, agentic AI system that enables structured reasoning over internal Markdown documentation using lightweight LLMs, modular chunking, and CLI-based workflows.
+
+This guide outlines the exact tools, versions, and configurations needed to get started with Soothsayer in a secure and reproducible manner. It’s built for both technical and non-technical teams who want to enable document intelligence without relying on cloud-based AI services.
+
+---
 
 ## Why It Matters
 
-Documentation is often overlooked as a source of real-time intelligence. Soothsayer turns your `.md` files into a living knowledge source—allowing you to query onboarding docs, architecture decisions, or changelogs using natural language, without relying on cloud-based black-box models.
+Too often, internal documentation sits unused because it's hard to navigate, unstructured, or siloed.
+
+Soothsayer transforms `.md` files into a queryable, explainable, and agent-powered system — letting teams reason over docs the same way they’d ask a subject-matter expert.
+
+A proper setup ensures:
+
+- Reproducible local development (no cloud risk)
+- Faster time-to-answer for documentation queries
+- Auditability, privacy, and alignment with enterprise data governance
+
+---
 
 ## Audience, Scope & Personas
 
-This system is built for:
+### Audience
 
-- **Developers & DevOps Engineers**: to integrate documentation reasoning into CI/CD or CLI workflows.
-- **Technical Writers & Product Teams**: to make internal docs queryable and explainable.
-- **Change Managers & Business Analysts**: to ensure communication clarity and auditability from documentation.
+- Developers and DevOps engineers building automation over documentation
+- Technical writers, content strategists, or internal comms teams
+- Business analysts and change managers focused on clarity, compliance, and reuse
 
-Here is the fully detailed and clean Prerequisites section, rewritten to match your GitHub documentation style and make it understandable for developers, DevOps engineers, and non-technical contributors alike.
+### Scope
+
+This document covers:
+
+- Tool and environment setup
+- Dependency installation
+- Markdown structure requirements
+- Testing and troubleshooting flows
+
+---
 
 ## Prerequisites
 
-Before running Soothsayer Suite, ensure the following system and environment dependencies are installed and correctly configured.
+The table below outlines the base system and environment requirements for installing and running Soothsayer locally.
 
----
+| Requirement       | Minimum Version | Notes |
+|-------------------|------------------|-------|
+| Python            | `>= 3.10`        | Prefer 3.10 or 3.11. Avoid 3.12+ unless validated |
+| OS                | macOS, Linux, WSL | Native Windows unsupported; use WSL |
+| Virtual Environment | Recommended   | Use `venv` or `conda` for isolation |
 
-### 🛠️ System Requirements
+### Python Dependencies
 
-- **Python:** `>=3.10`  
-  (Recommended: 3.10 or 3.11 — avoid 3.12+ unless compatibility is confirmed)
-- **OS:** macOS, Linux, or WSL-compatible Windows
-
----
-
-### 📦 Python Packages
-
-Install all required dependencies using:
+Install using:
 
 ```bash
 pip install -r requirements.txt
+
+Package	Minimum Version	Purpose
+
+typer	>= 0.9.0	CLI interface
+requests	>= 2.31.0	API and fallback calls
+langgraph	>= 0.0.24	Agent control flow (via LangChain)
+sentence-transformers	>= 2.2.2	Embeddings and text encoding
+faiss-cpu (optional)	>= 1.7.4	Vector search (future support)
+numpy	>= 1.24.0	Embedding preprocessing
+python-dotenv	>= 1.0.1	Loads fallback config from .env file
 ```
-Minimum versions confirmed:
-```bash
-typer>=0.9.0
 
-requests>=2.31.0
-
-langgraph>=0.0.24
-
-sentence-transformers>=2.2.2
-
-faiss-cpu>=1.7.4 (optional, for future vectorstore use)
-
-numpy>=1.24.0
-
-python-dotenv>=1.0.1
-```
 
 ---
 
-### LLM Backends
+LLM Configuration
 
-Primary (Local First)
+✅ Primary Inference: Ollama (Local)
 
-Ollama — must be installed and running on port 11434
-Install guide
+Component	Command / Description
 
-```bash
-ollama run mistral
-```
-Test Ollama service:
+Install Ollama	Install Guide
+Run model	ollama run mistral
+Test availability	curl http://localhost:11434/api/tags — should return model metadata
 
-curl http://localhost:11434/api/tags
 
-You should see model metadata in response.
+🕸️ Secondary (Fallback): Hugging Face Inference API
 
-Secondary (Fallback)
+Only used if Ollama is not running or unavailable.
+To enable:
 
-Hugging Face Inference API
-Add your token to .env file:
+1. Create a .env file in the project root
 
-```python
+
+2. Add your API token:
+
+
+
 HF_API_KEY=your_token_here
-```
-
----
-
-📄 Project File Structure
-
-Place your context files in docs/ directory as .md (Markdown)
-
-Each file should follow a semantic structure (e.g., headers like ## Purpose)
-
 
 
 ---
 
-✅ Quick Setup Checklist
+Project Structure
 
-Requirement	Installed?	Notes
+Place your .md context files inside the docs/ folder.
+Each file should use proper Markdown headers such as:
 
-Python >= 3.10	✅ / ❌	Use python3 --version
-Virtual environment	✅ / ❌	Recommended
-ollama installed	✅ / ❌	ollama run mistral must succeed
-Models downloaded	✅ / ❌	Use ollama list
-.env file configured	✅ / ❌	For Hugging Face fallback
-Markdown files ready	✅ / ❌	In docs/*.md
+## Purpose
+## Workflow
+## Risks
+## Dependencies
+
+Avoid uploading .txt, .pdf, or non-semantic files.
+
+
+---
+
+Quick Setup Checklist
+
+Requirement	Status	Verification Command
+
+Python ≥ 3.10	✅ / ❌	python3 --version
+Virtual environment	✅ / ❌	python -m venv venv
+Requirements installed	✅ / ❌	pip install -r requirements.txt
+Ollama installed	✅ / ❌	ollama run mistral
+Models downloaded	✅ / ❌	ollama list
+.env configured	✅ / ❌	Only if using fallback
+Markdown files ready	✅ / ❌	Place in /docs/
 
 
 
 ---
 
+Access Control & Permissions
 
-Access Control & Permissions (RBAC guidelines)
+This system runs locally and does not upload data to the cloud.
 
-Local execution only unless deployed as a service.
+If fallback is triggered, ensure .md files do not contain sensitive information.
 
-Ensure .md files are permissioned via OS-level ACLs.
-
-Sensitive documentation should not be passed to fallback inference.
+Use OS-level access control to manage file visibility.
 
 
-Practical Examples & Templates
 
-✅ Ask what a file contains:
+---
+
+Practical Examples & Templates (✅/❌)
+
+✅ Valid
 
 python -m cli.agent question --file docs/onboarding.md -- "Summarize the onboarding process"
 
-❌ Avoid using on unstructured or binary content:
+❌ Invalid
 
 python -m cli.agent question --file docs/secrets.txt -- "List all passwords"
 
+> Unstructured files or non-Markdown formats will break chunking and reasoning.
+
+
+
+
+---
+
 Known Issues & Friction Points
 
-Large files may exceed chunking capacity.
+Issue	Impact	Resolution
 
-Ollama model must be pre-downloaded and ready.
+Ollama not running	CLI returns no output	Run ollama serve and validate port 11434
+.env misconfigured	Fallback LLM won't load	Ensure HF_API_KEY is correct
+Poor Markdown structure	Inaccurate LLM results	Use headers and sections in .md files
+Large files or long lists	Chunking errors	Split documents or reduce input size
 
-Hugging Face fallback may return inconsistent results if model mismatch occurs.
 
+
+---
 
 Tips & Best Practices
 
-Structure your markdown clearly (##, ###, bullet points).
+✅ Do
 
-Use test mode to validate chunking before querying with LLM.
+Use clear headers (##) and logical bullets in all Markdown files
 
-Validate Ollama with curl http://localhost:11434/api/tags.
+Validate your LLM setup before first query (--test-mode)
 
+Keep .env out of version control (use .gitignore)
+
+
+❌ Don’t
+
+Use binary or plaintext .txt files
+
+Rely on fallback for private data
+
+Assume your Markdown is readable without testing it
+
+
+
+---
 
 Troubleshooting Guidance
 
-Ollama not responding?
+Symptom	Likely Cause	Resolution
 
-Run ollama serve or ollama run mistral
-
-Ensure port 11434 is not blocked.
-
-
-LLM errors or fallback issues?
-
-Check internet access.
-
-Use --test-mode to validate logic path.
+“No response from CLI”	Ollama not running	Start ollama run mistral
+“Fallback doesn’t activate”	Missing .env	Add HF_API_KEY
+“Markdown not understood”	Bad structure	Add semantic headers and bullets
+“Inference failed silently”	Conflicting Python versions	Use pyenv or virtualenv isolation
 
 
 
-### Dependencies, Risks & Escalation Path
+---
 
-Relies on:
+Dependencies, Risks & Escalation Path
 
-ollama for LLM inference
+Dependencies
 
-LangGraph (via LangChain) for structured reasoning
+Tool	Role
 
-Typer for CLI interface
-
-FAISS for optional vector storage (future-ready)
-
-
-Risks:
-
-Model not loading
-
-Missing .env 
-
-Markdown malformed or missing expected headers
-
-API keys mismanagement if not vigilant
+Ollama	Local LLM inference
+LangGraph	Structured agent reasoning
+Typer	CLI UX and routing
+FAISS (opt)	Vector retrieval backend (future)
+dotenv	Loads fallback credentials
 
 
+Risks
 
-### Success Metrics & Outcomes
+Risk	Mitigation
 
-CLI returns formatted response successfully
-
-Agents process chunks using the full flow
-
-Output aligns with test vs production flows consistently
+Fallback runs on sensitive data	Use local-only .md content or disable fallback
+Incompatible Markdown files	Validate with --test-mode
+Ollama model not loaded	Pre-download mistral and confirm with ollama list
 
 
-### Resources & References
+
+---
+
+Success Metrics & Outcomes
+
+Metric	Threshold
+
+CLI answers returned	✅ Success response within 2 seconds
+Chunks processed and routed	✅ Flow traces available if verbose
+Structured output generated	✅ Markdown or string output with correct headers
+Fallback not triggered (default)	✅ Ollama responds consistently on port 11434
+
+
+
+---
+
+Resources & References
 
 Ollama Docs
 
-LangGraph
+LangGraph on GitHub
 
-LangChain
+LangChain Overview
 
-Typer CLI
+Typer CLI Framework
 
+Markdown Best Practices
+
+
+
+---
 
 Last Reviewed / Last Updated
 
-Date: 2025-08-04
+Date: August 6, 2025
+Maintainer: Shailesh Rawat (PoeticMayhem)
+Version: v1.0
+Status: ✅ Stable
 
-Maintainer: Shailesh Rawat
+
+---
+
+Let me know if you’d like this split into multiple files (e.g., `README.md`, `setup.md`, `troubleshooting.md`) or continue with the next document (e.g., `agent-flow.md`, `security-guidelines.md`, etc.).
+
