@@ -65,16 +65,16 @@ python-dotenv>=1.0.1
 
 ---
 
-🧠 LLM Backends
+### LLM Backends
 
 Primary (Local First)
 
 Ollama — must be installed and running on port 11434
 Install guide
 
-
+```bash
 ollama run mistral
-
+```
 Test Ollama service:
 
 curl http://localhost:11434/api/tags
@@ -86,9 +86,9 @@ Secondary (Fallback)
 Hugging Face Inference API
 Add your token to .env file:
 
-
+```python
 HF_API_KEY=your_token_here
-
+```
 
 ---
 
@@ -116,9 +116,6 @@ Markdown files ready	✅ / ❌	In docs/*.md
 
 
 ---
-
-Let me know if you'd like an `.env.template` file generated or a setup script (`setup.sh`) added to automate these steps.
-
 
 
 Access Control & Permissions (RBAC guidelines)
@@ -175,7 +172,7 @@ Use --test-mode to validate logic path.
 
 
 
-Dependencies, Risks & Escalation Path
+### Dependencies, Risks & Escalation Path
 
 Relies on:
 
@@ -192,13 +189,15 @@ Risks:
 
 Model not loading
 
-Missing .env
+Missing .env 
 
 Markdown malformed or missing expected headers
 
+API keys mismanagement if not vigilant
 
 
-Success Metrics & Outcomes
+
+### Success Metrics & Outcomes
 
 CLI returns formatted response successfully
 
@@ -207,7 +206,7 @@ Agents process chunks using the full flow
 Output aligns with test vs production flows consistently
 
 
-Resources & References
+### Resources & References
 
 Ollama Docs
 
@@ -223,7 +222,3 @@ Last Reviewed / Last Updated
 Date: 2025-08-04
 
 Maintainer: Shailesh Rawat
-
-
-Let me know if you'd like to add Mermaid diagrams or split this into multiple files for `docs/`, `agents/`, or `cli/`.
-
