@@ -72,8 +72,6 @@ pip install -r requirements.txt
 ```
 Package	Minimum Version	Purpose
 
-typer	>= 0.9.0	### Python Dependencies
-
 
 | Package                  | Minimum Version | Purpose                                 |
 |--------------------------|------------------|------------------------------------------|
