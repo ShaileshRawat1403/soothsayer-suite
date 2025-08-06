@@ -23,41 +23,103 @@ This system is built for:
 - **Technical Writers & Product Teams**: to make internal docs queryable and explainable.
 - **Change Managers & Business Analysts**: to ensure communication clarity and auditability from documentation.
 
+Here is the fully detailed and clean Prerequisites section, rewritten to match your GitHub documentation style and make it understandable for developers, DevOps engineers, and non-technical contributors alike.
+
 ## Prerequisites
 
-- Python 3.10+
-- Ollama with a local model (`mistral` or `llama3`) downloaded
-- Local markdown files under the `docs/` directory
-- Hugging Face account (optional fallback)
-- `.env` file for model configuration
+Before running Soothsayer Suite, ensure the following system and environment dependencies are installed and correctly configured.
 
-## Security, Compliance & Privacy
+---
 
-- No cloud dependency unless Hugging Face fallback is triggered.
-- `.env` is excluded via `.gitignore`.
-- The system can run in secure, offline environments.
-- Ideal for enterprise settings with compliance restrictions.
+### 🛠️ System Requirements
 
-## Tasks & Step-by-Step Instructions
+- **Python:** `>=3.10`  
+  (Recommended: 3.10 or 3.11 — avoid 3.12+ unless compatibility is confirmed)
+- **OS:** macOS, Linux, or WSL-compatible Windows
 
-### Install dependencies
+---
+
+### 📦 Python Packages
+
+Install all required dependencies using:
 
 ```bash
 pip install -r requirements.txt
+```
+Minimum versions confirmed:
+```bash
+typer>=0.9.0
 
-Start Ollama
+requests>=2.31.0
+
+langgraph>=0.0.24
+
+sentence-transformers>=2.2.2
+
+faiss-cpu>=1.7.4 (optional, for future vectorstore use)
+
+numpy>=1.24.0
+
+python-dotenv>=1.0.1
+```
+
+---
+
+🧠 LLM Backends
+
+Primary (Local First)
+
+Ollama — must be installed and running on port 11434
+Install guide
+
 
 ollama run mistral
-# or
-ollama serve
 
-Run in test mode (no LLM call)
+Test Ollama service:
 
-python -m cli.agent question --file docs/sample.md --test-mode -- "What is the purpose of this repo?"
+curl http://localhost:11434/api/tags
 
-Run full agentic reasoning
+You should see model metadata in response.
 
-python -m cli.agent question --file docs/sample.md -- "How does this system chunk and reason over markdown?"
+Secondary (Fallback)
+
+Hugging Face Inference API
+Add your token to .env file:
+
+
+HF_API_KEY=your_token_here
+
+
+---
+
+📄 Project File Structure
+
+Place your context files in docs/ directory as .md (Markdown)
+
+Each file should follow a semantic structure (e.g., headers like ## Purpose)
+
+
+
+---
+
+✅ Quick Setup Checklist
+
+Requirement	Installed?	Notes
+
+Python >= 3.10	✅ / ❌	Use python3 --version
+Virtual environment	✅ / ❌	Recommended
+ollama installed	✅ / ❌	ollama run mistral must succeed
+Models downloaded	✅ / ❌	Use ollama list
+.env file configured	✅ / ❌	For Hugging Face fallback
+Markdown files ready	✅ / ❌	In docs/*.md
+
+
+
+---
+
+Let me know if you'd like an `.env.template` file generated or a setup script (`setup.sh`) added to automate these steps.
+
+
 
 Access Control & Permissions (RBAC guidelines)
 
