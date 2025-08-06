@@ -69,7 +69,7 @@ Install using:
 
 ```bash
 pip install -r requirements.txt
-
+```
 Package	Minimum Version	Purpose
 
 typer	>= 0.9.0	CLI interface
@@ -79,7 +79,6 @@ sentence-transformers	>= 2.2.2	Embeddings and text encoding
 faiss-cpu (optional)	>= 1.7.4	Vector search (future support)
 numpy	>= 1.24.0	Embedding preprocessing
 python-dotenv	>= 1.0.1	Loads fallback config from .env file
-```
 
 
 ---
